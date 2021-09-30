@@ -103,7 +103,7 @@ def combine(resultObject1, resultObject2):
     if resultObject1.right_size>=1 and resultObject2.left_size>=1:
         continueDownMiddle = True
 
-    #If it continues down the middle, do
+    #If it continues down the middle
     if continueDownMiddle == True:
         competitor = resultObject1.right_size + resultObject2.left_size
         if competitor > leftside and competitor > rightside:
