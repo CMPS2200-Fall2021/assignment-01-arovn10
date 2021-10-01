@@ -135,6 +135,5 @@ def test_longest_run_recursive():
     assert longest_run([12, 12, 12, 8, 12, 12, 0, 12, 12, 12, 12], 12) == 4
 
 
-
-
-test_longest_run_recursive()
+def test_foo():
+    assert foo(5) == 5
