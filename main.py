@@ -90,7 +90,7 @@ def combine(resultObject1, resultObject2):
 
     if resultObject2.is_entire_range == True:
     #if the entire range and object 1 right side has the key
-            rightside = resultObject2.right_size + resultObject1.left_size
+            rightside = resultObject2.right_size + resultObject1.right_size
     else:
 
             rightside = resultObject2.right_size
@@ -127,13 +127,14 @@ def combine(resultObject1, resultObject2):
 
 def test_longest_run():
     assert longest_run([2,12,12,8,12,12,12,0,12,1], 12) == 3
-    assert longest_run([12, 12, 12, 8, 12, 12, 0, 12, 1], 12) == 3
-    assert longest_run([12, 12, 12, 8, 12, 12, 0, 12, 12, 12, 12], 12) == 4
+
 
 def test_longest_run_recursive():
     assert longest_run_recursive([6, 6, 12, 12], 12).longest_size == 2
+    assert longest_run([12, 12, 12, 8, 12, 12, 0, 12, 1], 12) == 3
+    assert longest_run([12, 12, 12, 8, 12, 12, 0, 12, 12, 12, 12], 12) == 4
 
 
 
 
-test_longest_run()
+test_longest_run_recursive()
