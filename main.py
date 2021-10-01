@@ -56,9 +56,10 @@ def longest_run_recursive(mylist, key):
         else:
             mainList = Result(0, 0, 0, False)
             return mainList
-
-    halfOne = longest_run_recursive(mylist[len(mylist)/2:], key)
-    halfTwo = longest_run_recursive(mylist[:len(mylist)/2], key)
+    else:
+        length = len(mylist)//2
+        halfOne = longest_run_recursive(mylist[:length], key)
+        halfTwo = longest_run_recursive(mylist[length:], key)
 
     return combine(halfOne, halfTwo)
 
@@ -69,7 +70,7 @@ def longest_run_recursive(mylist, key):
 
 ## Feel free to add your own tests here.
 def combine(resultObject1, resultObject2):
-    if resultObject1.is_entire_range and resultObject2.is_entire_range:
+    if resultObject1.is_entire_range == True and resultObject2.is_entire_range == True:
         return Result((resultObject1.left_size+resultObject2.left_size), (resultObject1.right_size+resultObject2.right_size), (resultObject1.left_size+resultObject2.left_size), True)
 #everything after this point is false
 
@@ -77,7 +78,7 @@ def combine(resultObject1, resultObject2):
     #_______________________________________________________
     #Finding the right and left lengths
 
-    if resultObject1.is_entire_range:
+    if resultObject1.is_entire_range == True:
         #if its entire range and object 2 left side has the key
         leftside = resultObject1.left_size + resultObject2.left_size
 
@@ -87,9 +88,9 @@ def combine(resultObject1, resultObject2):
 
 
 
-    if resultObject2.is_entire_range:
+    if resultObject2.is_entire_range == True:
     #if the entire range and object 1 right side has the key
-            rightside = resultObject2.right_size + resultObject1.right_size
+            rightside = resultObject2.right_size + resultObject1.left_size
     else:
 
             rightside = resultObject2.right_size
@@ -104,14 +105,14 @@ def combine(resultObject1, resultObject2):
         continueDownMiddle = True
 
     #If it continues down the middle
-    if continueDownMiddle == True:
-        competitor = resultObject1.right_size + resultObject2.left_size
-        if competitor > leftside and competitor > rightside:
-            longestRun = competitor
-        elif competitor > leftside and competitor < rightside:
-            longestRun = rightside
-        elif competitor < leftside and competitor > rightside:
-            longestRun = leftside
+
+    competitor = resultObject1.right_size + resultObject2.left_size
+
+    if competitor > max(resultObject1.longest_size, resultObject2.longest_size):
+        return Result(leftside, rightside, competitor, False)
+    else:
+
+        return Result(leftside, rightside, max(resultObject1.longest_size, resultObject2.longest_size), False)
 
 
 
@@ -128,7 +129,7 @@ def test_longest_run():
     assert longest_run([2,12,12,8,12,12,12,0,12,1], 12) == 3
 
 def test_longest_run_recursive():
-    assert longest_run_recursive([2,12,12,8,12,12,12,0,12,1], 12) == 3
+    assert longest_run_recursive([6, 6, 12, 12], 12).longest_size == 2
 
 
 
