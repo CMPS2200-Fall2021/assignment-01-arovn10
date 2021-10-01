@@ -22,8 +22,8 @@ def longest_run(mylist, key):
         if value == key:
             numOfMatches += 1
         else:
-            maxNumOfMatches.append(numOfMatches)
             numOfMatches = 0
+        maxNumOfMatches.append(numOfMatches)
 
 
     return max(maxNumOfMatches)
@@ -127,6 +127,8 @@ def combine(resultObject1, resultObject2):
 
 def test_longest_run():
     assert longest_run([2,12,12,8,12,12,12,0,12,1], 12) == 3
+    assert longest_run([12, 12, 12, 8, 12, 12, 0, 12, 1], 12) == 3
+    assert longest_run([12, 12, 12, 8, 12, 12, 0, 12, 12, 12, 12], 12) == 4
 
 def test_longest_run_recursive():
     assert longest_run_recursive([6, 6, 12, 12], 12).longest_size == 2
@@ -134,3 +136,4 @@ def test_longest_run_recursive():
 
 
 
+test_longest_run()
